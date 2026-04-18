@@ -1,0 +1,138 @@
+.date-card {
+  background: linear-gradient(135deg, #d4524f 0%, #e67e73 100%);
+  color: #fff;
+  text-align: center;
+  padding: 40rpx;
+}
+
+.date-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lunar-date {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.solar-date {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.jieqi {
+  margin-top: 20rpx;
+  padding: 10rpx 30rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50rpx;
+  display: inline-block;
+}
+
+.jieqi-text {
+  font-size: 28rpx;
+}
+
+.weather-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-info {
+  display: flex;
+  align-items: baseline;
+  gap: 20rpx;
+}
+
+.temperature {
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.weather-desc {
+  font-size: 32rpx;
+  color: #666;
+}
+
+.yiji-card {
+  padding: 40rpx;
+}
+
+.yiji-section {
+  margin-bottom: 30rpx;
+}
+
+.yiji-section:last-child {
+  margin-bottom: 0;
+}
+
+.yiji-title {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.yi-title {
+  color: #52c41a;
+}
+
+.ji-title {
+  color: #ff4d4f;
+}
+
+.icon {
+  font-size: 28rpx;
+}
+
+.yiji-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.yiji-item {
+  padding: 10rpx 20rpx;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.divider {
+  height: 1rpx;
+  background: #e8e8e8;
+  margin: 30rpx 0;
+}
+
+.blessing-card {
+  background: linear-gradient(135deg, #fff9e6 0%, #fff5cc 100%);
+  border-left: 6rpx solid #faad14;
+}
+
+.blessing-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #d4524f;
+  margin-bottom: 20rpx;
+}
+
+.blessing-text {
+  font-size: 30rpx;
+  line-height: 1.8;
+  color: #666;
+}
+
+.generate-btn {
+  margin: 40rpx 0;
+  font-weight: bold;
+}
+
+ad {
+  margin-top: 40rpx;
+}

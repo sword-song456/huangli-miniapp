@@ -1,0 +1,58 @@
+.canvas-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx 0;
+}
+
+.share-canvas {
+  width: 750rpx;
+  height: 1334rpx;
+  background: #fff;
+}
+
+.preview-image {
+  width: 690rpx;
+  height: auto;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.button-group {
+  padding: 40rpx;
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  padding: 24rpx;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%);
+  color: #fff;
+  border: none;
+}
+
+.share-btn {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  color: #fff;
+  border: none;
+}
+
+.tip {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  padding: 20rpx;
+}
+
+.loading {
+  text-align: center;
+  padding: 100rpx;
+  color: #999;
+}

@@ -1,0 +1,59 @@
+<view class="container">
+  <!-- 日期卡片 -->
+  <view class="card date-card">
+    <view class="date-header">
+      <text class="lunar-date">{{lunarDate}}</text>
+      <text class="solar-date">{{solarDate}}</text>
+    </view>
+    <view class="jieqi" wx:if="{{jieqi}}">
+      <text class="jieqi-text">{{jieqi}}</text>
+    </view>
+  </view>
+
+  <!-- 天气卡片 -->
+  <view class="card weather-card">
+    <view class="weather-info">
+      <text class="temperature">{{weather.temperature}}°</text>
+      <text class="weather-desc">{{weather.desc}}</text>
+    </view>
+  </view>
+
+  <!-- 宜忌卡片 -->
+  <view class="card yiji-card">
+    <view class="yiji-section">
+      <view class="yiji-title yi-title">
+        <text class="icon">✓</text>
+        <text>宜</text>
+      </view>
+      <view class="yiji-content">
+        <text class="yiji-item" wx:for="{{yi}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="yiji-section">
+      <view class="yiji-title ji-title">
+        <text class="icon">✗</text>
+        <text>忌</text>
+      </view>
+      <view class="yiji-content">
+        <text class="yiji-item" wx:for="{{ji}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI祝福语 -->
+  <view class="card blessing-card">
+    <view class="blessing-title">今日平安</view>
+    <view class="blessing-text">{{blessing}}</view>
+  </view>
+
+  <!-- 生成平安卡按钮 -->
+  <button class="btn-primary generate-btn" bindtap="generateCard">
+    生成今日平安卡
+  </button>
+
+  <!-- 广告位 -->
+  <ad unit-id="adunit-xxxxxx" ad-type="grid" grid-opacity="0.8" grid-count="5"></ad>
+</view>

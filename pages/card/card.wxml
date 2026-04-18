@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="canvas-container">
+    <!-- Canvas用于绘制 -->
+    <canvas
+      canvas-id="shareCanvas"
+      class="share-canvas"
+      style="width: 750rpx; height: 1334rpx;"
+      wx:if="{{!imageUrl}}"
+    ></canvas>
+
+    <!-- 生成后显示图片 -->
+    <image
+      class="preview-image"
+      src="{{imageUrl}}"
+      mode="widthFix"
+      wx:if="{{imageUrl}}"
+    ></image>
+  </view>
+
+  <view class="loading" wx:if="{{!imageUrl}}">
+    正在生成平安卡...
+  </view>
+
+  <view class="button-group" wx:if="{{imageUrl}}">
+    <button class="action-btn save-btn" bindtap="saveImage">
+      保存到相册
+    </button>
+    <button class="action-btn share-btn" open-type="share">
+      分享给好友
+    </button>
+  </view>
+
+  <view class="tip" wx:if="{{imageUrl}}">
+    长按图片也可以保存或分享
+  </view>
+
+  <!-- 广告位 -->
+  <ad unit-id="adunit-xxxxxx" ad-type="grid" wx:if="{{imageUrl}}"></ad>
+</view>

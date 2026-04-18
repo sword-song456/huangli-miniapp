@@ -1,0 +1,28 @@
+# 微信开发者工具生成的文件
+.DS_Store
+node_modules/
+miniprogram_npm/
+
+# 项目私有配置
+project.private.config.json
+
+# 敏感信息（包含API密钥）
+utils/api.config.js
+
+# 日志文件
+*.log
+npm-debug.log*
+
+# 编辑器配置
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件
+.tmp/
+.cache/
+
+# 微信开发者工具
+.wechat_devtools/
