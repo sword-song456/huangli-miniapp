@@ -3,6 +3,12 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
+@media (prefers-color-scheme: dark) {
+  page {
+    background-color: #1f1f1f;
+  }
+}
+
 .container {
   padding: 20rpx;
 }
@@ -15,11 +21,24 @@ page {
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
 }
 
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #2a2a2a;
+    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.3);
+  }
+}
+
 .title {
   font-size: 36rpx;
   font-weight: bold;
   color: #333;
   margin-bottom: 20rpx;
+}
+
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: #e5e5e5;
+  }
 }
 
 .text-primary {
@@ -29,6 +48,12 @@ page {
 .text-secondary {
   color: #666;
   font-size: 28rpx;
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-secondary {
+    color: #999;
+  }
 }
 
 .btn-primary {

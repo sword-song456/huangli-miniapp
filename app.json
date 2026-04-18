@@ -8,16 +8,19 @@
     "navigationBarBackgroundColor": "#d4524f",
     "navigationBarTitleText": "今日黄历",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f5f5f5"
+    "backgroundColor": "#f5f5f5",
+    "darkmode": true,
+    "themeLocation": "theme.json"
   },
   "tabBar": {
-    "color": "#666666",
+    "color": "#999999",
     "selectedColor": "#d4524f",
     "backgroundColor": "#ffffff",
+    "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "今日黄历"
+        "text": "黄历"
       },
       {
         "pagePath": "pages/card/card",

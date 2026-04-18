@@ -104,6 +104,13 @@
   color: #666;
 }
 
+@media (prefers-color-scheme: dark) {
+  .yiji-item {
+    background: #3a3a3a;
+    color: #999;
+  }
+}
+
 .divider {
   height: 1rpx;
   background: #e8e8e8;
