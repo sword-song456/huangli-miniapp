@@ -99,7 +99,6 @@ Page({
 
   generateCard() {
     console.log('点击生成平安卡按钮')
-    console.log('当前数据:', this.data)
 
     // 检查数据是否加载完成
     if (!this.data.lunarDate || !this.data.blessing) {
@@ -110,17 +109,20 @@ Page({
       return
     }
 
-    // 跳转到平安卡生成页面
-    wx.navigateTo({
-      url: '/pages/card/card?data=' + encodeURIComponent(JSON.stringify({
-        solarDate: this.data.solarDate,
-        lunarDate: this.data.lunarDate,
-        jieqi: this.data.jieqi,
-        weather: this.data.weather,
-        yi: this.data.yi,
-        ji: this.data.ji,
-        blessing: this.data.blessing
-      }))
+    // 将数据存储到全局，因为tabBar页面不能传参
+    getApp().globalData.cardData = {
+      solarDate: this.data.solarDate,
+      lunarDate: this.data.lunarDate,
+      jieqi: this.data.jieqi,
+      weather: this.data.weather,
+      yi: this.data.yi,
+      ji: this.data.ji,
+      blessing: this.data.blessing
+    }
+
+    // 跳转到平安卡页面（tabBar页面使用switchTab）
+    wx.switchTab({
+      url: '/pages/card/card'
     })
   }
 })

@@ -7,11 +7,24 @@ Page({
   },
 
   onLoad(options) {
-    if (options.data) {
-      const cardData = JSON.parse(decodeURIComponent(options.data))
-      this.setData({ cardData })
+    // 从全局数据获取
+    const app = getApp()
+    if (app.globalData.cardData) {
+      this.setData({ cardData: app.globalData.cardData })
 
       // 延迟绘制，确保canvas已渲染
+      setTimeout(() => {
+        this.drawCard()
+      }, 500)
+    }
+  },
+
+  onShow() {
+    // 每次显示时检查数据
+    const app = getApp()
+    if (app.globalData.cardData && !this.data.cardData) {
+      this.setData({ cardData: app.globalData.cardData })
+
       setTimeout(() => {
         this.drawCard()
       }, 500)
