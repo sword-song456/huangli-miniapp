@@ -32,7 +32,7 @@ Page({
 
     const ctx = wx.createCanvasContext('shareCanvas')
     const { canvasWidth, canvasHeight } = this.data
-    const { solarDate, lunarDate, jieqi, weather, yi, ji, blessing } = this.data.cardData
+    const { solarDate, lunarDate, jieqi, yi, ji, blessing } = this.data.cardData
 
     try {
       // 背景渐变
@@ -61,19 +61,18 @@ Page({
       ctx.fillText(solarDate, canvasWidth / 2, 175)
 
       // 节气
+      let yPos = 210
       if (jieqi) {
         ctx.setFillStyle('#d4524f')
         ctx.setFontSize(20)
-        ctx.fillText(`【${jieqi}】`, canvasWidth / 2, 210)
+        ctx.fillText(`【${jieqi}】`, canvasWidth / 2, yPos)
+        yPos += 50
+      } else {
+        yPos += 30
       }
 
-      // 天气
-      ctx.setFillStyle('#333')
-      ctx.setFontSize(24)
-      ctx.fillText(`${weather.temperature}° ${weather.desc}`, canvasWidth / 2, 260)
-
       // 宜忌区域
-      let yPos = 310
+      yPos += 20
 
       // 宜
       ctx.setFillStyle('#52c41a')
@@ -99,9 +98,9 @@ Page({
       ctx.fillText(jiText, 80, yPos)
 
       // 祝福语区域
-      yPos = 450
+      yPos = 420
       ctx.setFillStyle('rgba(255, 255, 255, 0.9)')
-      ctx.fillRect(30, yPos - 25, canvasWidth - 60, 140)
+      ctx.fillRect(30, yPos - 25, canvasWidth - 60, 160)
 
       ctx.setFillStyle('#d4524f')
       ctx.setFontSize(20)
