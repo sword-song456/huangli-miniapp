@@ -33,7 +33,4 @@
   <view class="tip" wx:if="{{imageUrl}}">
     长按图片也可以保存或分享
   </view>
-
-  <!-- 广告位 -->
-  <ad unit-id="adunit-xxxxxx" ad-type="grid" wx:if="{{imageUrl}}"></ad>
 </view>
