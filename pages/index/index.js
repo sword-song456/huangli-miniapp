@@ -98,6 +98,18 @@ Page({
   },
 
   generateCard() {
+    console.log('点击生成平安卡按钮')
+    console.log('当前数据:', this.data)
+
+    // 检查数据是否加载完成
+    if (!this.data.lunarDate || !this.data.blessing) {
+      wx.showToast({
+        title: '数据加载中，请稍候',
+        icon: 'none'
+      })
+      return
+    }
+
     // 跳转到平安卡生成页面
     wx.navigateTo({
       url: '/pages/card/card?data=' + encodeURIComponent(JSON.stringify({
