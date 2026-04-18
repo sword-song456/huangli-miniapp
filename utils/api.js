@@ -1,66 +1,55 @@
+// 导入本地农历计算库
+const lunar = require('./lunar.js')
+
 // API配置
 // 从配置文件导入密钥（如果存在）
 let apiConfig = {}
 try {
   apiConfig = require('./api.config.js')
 } catch (e) {
-  console.warn('未找到api.config.js，使用默认配置')
+  console.warn('未找到api.config.js，使用本地农历计算')
 }
 
 const API_CONFIG = {
-  // 聚合数据万年历API
-  juheKey: apiConfig.juheKey || 'YOUR_JUHE_API_KEY',
+  // 聚合数据万年历API（可选）
+  juheKey: apiConfig.juheKey || '',
   juheUrl: 'http://v.juhe.cn/calendar/day',
 
-  // 天行数据API
-  tianxingKey: apiConfig.tianxingKey || 'YOUR_TIANXING_API_KEY',
+  // 天行数据API（可选）
+  tianxingKey: apiConfig.tianxingKey || '',
   tianxingUrl: 'http://api.tianapi.com/lunar/index',
 
   // 天气API
-  weatherKey: apiConfig.weatherKey || 'YOUR_WEATHER_API_KEY',
+  weatherKey: apiConfig.weatherKey || '',
   weatherUrl: 'https://api.seniverse.com/v3/weather/now.json'
 }
 
 /**
- * 获取黄历数据
+ * 获取黄历数据（使用本地计算）
  */
 function getHuangli(year, month, day) {
-  return new Promise((resolve, reject) => {
-    const dateStr = `${year}-${month}-${day}`
+  return new Promise((resolve) => {
+    try {
+      // 使用本地农历计算库
+      const huangliData = lunar.getHuangli(year, month, day)
 
-    wx.request({
-      url: API_CONFIG.juheUrl,
-      data: {
-        key: API_CONFIG.juheKey,
-        date: dateStr
-      },
-      success: (res) => {
-        if (res.data.error_code === 0) {
-          const result = res.data.result.data
-
-          // 解析数据
-          const huangliData = {
-            lunarDate: `${result.lunar}`,
-            jieqi: result.suit || '',
-            yi: result.avoid ? result.avoid.split('.').filter(item => item) : [],
-            ji: result.avoid ? result.avoid.split('.').filter(item => item) : [],
-            // 聚合数据格式可能不同，需要根据实际返回调整
-            ganzhiYear: result.animalsYear || '',
-            weekday: result.weekday || ''
-          }
-
-          resolve(huangliData)
-        } else {
-          // 如果聚合数据失败，使用模拟数据
-          resolve(getMockHuangli())
-        }
-      },
-      fail: (err) => {
-        console.error('获取黄历失败:', err)
-        // 失败时返回模拟数据
+      if (huangliData) {
+        resolve({
+          lunarDate: huangliData.lunarDate,
+          jieqi: huangliData.solarTerm,
+          yi: huangliData.yi,
+          ji: huangliData.ji,
+          ganzhiYear: huangliData.ganzhiYear,
+          animal: huangliData.animal
+        })
+      } else {
+        // 降级到模拟数据
         resolve(getMockHuangli())
       }
-    })
+    } catch (error) {
+      console.error('本地黄历计算失败:', error)
+      resolve(getMockHuangli())
+    }
   })
 }
 

@@ -1,8 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/card/card",
-    "pages/calendar/calendar"
+    "pages/card/card"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,15 +17,11 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "今日黄历",
-        "iconPath": "images/calendar.png",
-        "selectedIconPath": "images/calendar-active.png"
+        "text": "今日黄历"
       },
       {
         "pagePath": "pages/card/card",
-        "text": "平安卡",
-        "iconPath": "images/card.png",
-        "selectedIconPath": "images/card-active.png"
+        "text": "平安卡"
       }
     ]
   },
