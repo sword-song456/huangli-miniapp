@@ -30,111 +30,129 @@ Page({
   drawCard() {
     wx.showLoading({ title: '生成中...' })
 
-    const ctx = wx.createCanvasContext('shareCanvas')
-    const { canvasWidth, canvasHeight } = this.data
-    const { solarDate, lunarDate, jieqi, yi, ji, blessing } = this.data.cardData
+    const query = wx.createSelectorQuery()
+    query.select('#shareCanvas')
+      .fields({ node: true, size: true })
+      .exec((res) => {
+        if (!res[0]) {
+          wx.hideLoading()
+          wx.showToast({ title: 'Canvas初始化失败', icon: 'none' })
+          return
+        }
 
-    try {
-      // 背景渐变
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight)
-      gradient.addColorStop(0, '#ffecd2')
-      gradient.addColorStop(1, '#fcb69f')
-      ctx.setFillStyle(gradient)
-      ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+        const canvas = res[0].node
+        const ctx = canvas.getContext('2d')
 
-      // 绘制装饰性山水图案（简化版）
-      this.drawMountain(ctx)
+        const dpr = wx.getSystemInfoSync().pixelRatio
+        canvas.width = 375 * dpr
+        canvas.height = 667 * dpr
+        ctx.scale(dpr, dpr)
 
-      // 标题区域
-      ctx.setFillStyle('#d4524f')
-      ctx.setFontSize(40)
-      ctx.setTextAlign('center')
-      ctx.fillText('今日平安', canvasWidth / 2, 80)
+        const { canvasWidth, canvasHeight } = this.data
+        const { solarDate, lunarDate, jieqi, yi, ji, blessing } = this.data.cardData
 
-      // 日期信息
-      ctx.setFillStyle('#333')
-      ctx.setFontSize(32)
-      ctx.fillText(lunarDate, canvasWidth / 2, 140)
+        try {
+          // 背景渐变
+          const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight)
+          gradient.addColorStop(0, '#ffecd2')
+          gradient.addColorStop(1, '#fcb69f')
+          ctx.fillStyle = gradient
+          ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-      ctx.setFillStyle('#666')
-      ctx.setFontSize(18)
-      ctx.fillText(solarDate, canvasWidth / 2, 175)
+          // 绘制装饰性山水图案
+          this.drawMountain(ctx, canvas)
 
-      // 节气
-      let yPos = 210
-      if (jieqi) {
-        ctx.setFillStyle('#d4524f')
-        ctx.setFontSize(20)
-        ctx.fillText(`【${jieqi}】`, canvasWidth / 2, yPos)
-        yPos += 50
-      } else {
-        yPos += 30
-      }
+          // 标题区域
+          ctx.fillStyle = '#d4524f'
+          ctx.font = 'bold 40px sans-serif'
+          ctx.textAlign = 'center'
+          ctx.fillText('今日平安', canvasWidth / 2, 80)
 
-      // 宜忌区域
-      yPos += 20
+          // 日期信息
+          ctx.fillStyle = '#333'
+          ctx.font = '32px sans-serif'
+          ctx.fillText(lunarDate, canvasWidth / 2, 140)
 
-      // 宜
-      ctx.setFillStyle('#52c41a')
-      ctx.setFontSize(22)
-      ctx.setTextAlign('left')
-      ctx.fillText('宜：', 40, yPos)
+          ctx.fillStyle = '#666'
+          ctx.font = '18px sans-serif'
+          ctx.fillText(solarDate, canvasWidth / 2, 175)
 
-      ctx.setFillStyle('#333')
-      ctx.setFontSize(18)
-      const yiText = yi.slice(0, 3).join('  ')
-      ctx.fillText(yiText, 80, yPos)
+          // 节气
+          let yPos = 210
+          if (jieqi) {
+            ctx.fillStyle = '#d4524f'
+            ctx.font = '20px sans-serif'
+            ctx.fillText(`【${jieqi}】`, canvasWidth / 2, yPos)
+            yPos += 50
+          } else {
+            yPos += 30
+          }
 
-      yPos += 40
+          // 宜忌区域
+          yPos += 20
 
-      // 忌
-      ctx.setFillStyle('#ff4d4f')
-      ctx.setFontSize(22)
-      ctx.fillText('忌：', 40, yPos)
+          // 宜
+          ctx.fillStyle = '#52c41a'
+          ctx.font = 'bold 22px sans-serif'
+          ctx.textAlign = 'left'
+          ctx.fillText('宜：', 40, yPos)
 
-      ctx.setFillStyle('#333')
-      ctx.setFontSize(18)
-      const jiText = ji.slice(0, 3).join('  ')
-      ctx.fillText(jiText, 80, yPos)
+          ctx.fillStyle = '#333'
+          ctx.font = '18px sans-serif'
+          const yiText = yi.slice(0, 3).join('  ')
+          ctx.fillText(yiText, 80, yPos)
 
-      // 祝福语区域
-      yPos = 420
-      ctx.setFillStyle('rgba(255, 255, 255, 0.9)')
-      ctx.fillRect(30, yPos - 25, canvasWidth - 60, 160)
+          yPos += 40
 
-      ctx.setFillStyle('#d4524f')
-      ctx.setFontSize(20)
-      ctx.setTextAlign('center')
-      ctx.fillText('平安祝福', canvasWidth / 2, yPos)
+          // 忌
+          ctx.fillStyle = '#ff4d4f'
+          ctx.font = 'bold 22px sans-serif'
+          ctx.fillText('忌：', 40, yPos)
 
-      // 绘制祝福语（自动换行）
-      ctx.setFillStyle('#666')
-      ctx.setFontSize(17)
-      this.drawTextWithWrap(ctx, blessing, canvasWidth / 2, yPos + 30, canvasWidth - 100, 25)
+          ctx.fillStyle = '#333'
+          ctx.font = '18px sans-serif'
+          const jiText = ji.slice(0, 3).join('  ')
+          ctx.fillText(jiText, 80, yPos)
 
-      // 底部小字
-      ctx.setFillStyle('#999')
-      ctx.setFontSize(14)
-      ctx.fillText('长按保存图片分享给好友', canvasWidth / 2, canvasHeight - 40)
+          // 祝福语区域
+          yPos = 420
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'
+          ctx.fillRect(30, yPos - 25, canvasWidth - 60, 160)
 
-      ctx.draw(false, () => {
-        // 绘制完成后立即生成图片
-        this.saveCanvasToImage()
+          ctx.fillStyle = '#d4524f'
+          ctx.font = 'bold 20px sans-serif'
+          ctx.textAlign = 'center'
+          ctx.fillText('平安祝福', canvasWidth / 2, yPos)
+
+          // 绘制祝福语（自动换行）
+          ctx.fillStyle = '#666'
+          ctx.font = '17px sans-serif'
+          this.drawTextWithWrap(ctx, blessing, canvasWidth / 2, yPos + 30, canvasWidth - 100, 25)
+
+          // 底部小字
+          ctx.fillStyle = '#999'
+          ctx.font = '14px sans-serif'
+          ctx.fillText('长按保存图片分享给好友', canvasWidth / 2, canvasHeight - 40)
+
+          // 生成图片
+          setTimeout(() => {
+            this.saveCanvasToImage(canvas)
+          }, 100)
+        } catch (error) {
+          console.error('绘制失败:', error)
+          wx.hideLoading()
+          wx.showToast({
+            title: '生成失败',
+            icon: 'none'
+          })
+        }
       })
-    } catch (error) {
-      console.error('绘制失败:', error)
-      wx.hideLoading()
-      wx.showToast({
-        title: '生成失败',
-        icon: 'none'
-      })
-    }
   },
 
-  drawMountain(ctx) {
+  drawMountain(ctx, canvas) {
     // 绘制简化的山水装饰
     const { canvasWidth, canvasHeight } = this.data
-    ctx.setFillStyle('rgba(212, 82, 79, 0.1)')
+    ctx.fillStyle = 'rgba(212, 82, 79, 0.1)'
     ctx.beginPath()
     ctx.moveTo(0, canvasHeight)
     ctx.lineTo(100, canvasHeight - 117)
@@ -167,9 +185,9 @@ Page({
     ctx.fillText(line, x, currentY)
   },
 
-  saveCanvasToImage() {
+  saveCanvasToImage(canvas) {
     wx.canvasToTempFilePath({
-      canvasId: 'shareCanvas',
+      canvas: canvas,
       success: (res) => {
         this.setData({
           imageUrl: res.tempFilePath

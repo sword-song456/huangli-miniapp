@@ -1,8 +1,9 @@
 <view class="container">
   <view class="canvas-container">
-    <!-- Canvas用于绘制 -->
+    <!-- Canvas用于绘制 (使用Canvas 2D) -->
     <canvas
-      canvas-id="shareCanvas"
+      type="2d"
+      id="shareCanvas"
       class="share-canvas"
       style="width: 375px; height: 667px;"
       wx:if="{{!imageUrl}}"
