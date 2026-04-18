@@ -7,8 +7,8 @@
 }
 
 .share-canvas {
-  width: 750rpx;
-  height: 1334rpx;
+  width: 375px;
+  height: 667px;
   background: #fff;
 }
 
