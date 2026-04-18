@@ -117,7 +117,7 @@ function solar2lunar(year, month, day) {
 
   const baseDate = new Date(1900, 0, 31)
   const objDate = new Date(year, month - 1, day)
-  let offset = (objDate - baseDate) / 86400000
+  let offset = Math.floor((objDate - baseDate) / 86400000)
 
   let lunarYear, lunarMonth, lunarDay
   let temp = 0
@@ -164,7 +164,7 @@ function solar2lunar(year, month, day) {
     --lunarMonth
   }
 
-  lunarDay = offset + 1
+  lunarDay = Math.floor(offset) + 1
 
   return {
     year: lunarYear,
@@ -244,7 +244,7 @@ function getHuangli(year, month, day) {
   const yiji = getYiJi(day)
 
   const lunarMonthStr = (lunar.isLeap ? '闰' : '') + lunarMonths[lunar.month - 1]
-  const lunarDayStr = lunarDays[lunar.day - 1]
+  const lunarDayStr = lunarDays[lunar.day - 1] || '初一'
 
   return {
     lunarDate: `${lunarMonthStr}${lunarDayStr}`,
