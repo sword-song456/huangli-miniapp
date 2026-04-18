@@ -109,7 +109,7 @@ Page({
       return
     }
 
-    // 将数据存储到全局，因为tabBar页面不能传参
+    // 将数据存储到全局
     getApp().globalData.cardData = {
       solarDate: this.data.solarDate,
       lunarDate: this.data.lunarDate,
@@ -120,8 +120,8 @@ Page({
       blessing: this.data.blessing
     }
 
-    // 跳转到平安卡页面（tabBar页面使用switchTab）
-    wx.switchTab({
+    // 跳转到平安卡页面
+    wx.navigateTo({
       url: '/pages/card/card'
     })
   }

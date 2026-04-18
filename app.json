@@ -12,21 +12,5 @@
     "darkmode": true,
     "themeLocation": "theme.json"
   },
-  "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#d4524f",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "黄历"
-      },
-      {
-        "pagePath": "pages/card/card",
-        "text": "平安卡"
-      }
-    ]
-  },
   "sitemapLocation": "sitemap.json"
 }
